@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>flower Animation</title>
+    <style>
+        body {
+            background-color: black; /* Fondo negro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Evita el desbordamiento horizontal */
+        }
+
+        .container {
+            position: relative; /* Establece el contenedor como un contexto de posicionamiento relativo */
+        }
+
+        .neon-text {
+            font-family: 'Arial', sans-serif;
+            font-size: 36px;
+            color: #ffffff; /* Color blanco */
+            text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff, 0 0 40px #ff00ff, 0 0 70px #ff00ff, 0 0 80px #ff00ff, 0 0 100px #ff00ff, 0 0 150px #ff00ff; /* Efecto neón */
+            position: absolute; /* Establece el posicionamiento absoluto */
+            top: calc(50% - 100px); /* Centra verticalmente restando la mitad de la altura del texto */
+            left: calc(50% - 50px); /* Centra horizontalmente restando la mitad del ancho del texto */
+            z-index: 1; /* Asegura que el texto esté encima de la animación de la flor */
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="points-container">
+    </div>
+    <div class="neon-text">ti amu musita</div>
+    <script>
+        const container = document.getElementById("points-container");
+        const numPoints = 10;
+
+        function createPoint() {
+            const point = document.createElement("div");
+            point.classList.add("point");
+            container.appendChild(point);
+
+            // Set initial position at the center
+            point.style.left = "50%";
+            point.style.top = "50%";
+
+            // Set animation properties
+            const animation = point.animate(
+                [
+                    { transform: "translate(-50%, -50%) rotate(-50deg)" },
+                    { transform: "translate(20%, -40%)"}
+                ],
+                {
+                    duration: 2000 + Math.random() * 2000,
+                    easing: "linear",
+                    iterations: Infinity,
+                    direction: "alternate",
+                }
+            );
+
+            return { point, animation };
+        }
+
+        function startAnimation() {
+            for (let i = 0; i < numPoints; i++) {
+                createPoint();
+            }
+        }
+
+        startAnimation();
+    </script>
+</body>
+</html>
